@@ -10,17 +10,17 @@ Nếu thỏa mãn điều kiện nội bộ, chương trình sẽ in `"You win!"
 ## Chạy thử và phân tích file 
 Ta cấp quyền chạy local cho file immutable và chạy thử xem chức năng của immutable hoạt động ra sao
 
-![Local run](local.png)
+![Local run](https://github.com/Writeup-Challenge-Le-Nam-Thang/Hacktheon/blob/8f442261caa630f812a34b5283946375813bede5/local.png)
 
 Tiếp theo ta kiểm tra xem cấu hình của file này là gì bằng câu lệnh `file ./immutable`
 
-![config](check.png)
+![config](https://github.com/Writeup-Challenge-Le-Nam-Thang/Hacktheon/blob/8f442261caa630f812a34b5283946375813bede5/check.png)
 
 Ta tiếp tục sử dụng công cụ ghidra để hỗ trợ dịch ngược giúp đọc file đễ dàng hơn
 
 
 
-![Ghidra Decompile](ghidra.png)
+![Ghidra Decompile](https://github.com/Writeup-Challenge-Le-Nam-Thang/Hacktheon/blob/8f442261caa630f812a34b5283946375813bede5/ghidra.png)
 
 ### Phân tích lỗ hổng 
 Hàm __isoc99_scanf("%s", local_98) đọc một chuỗi không giới hạn độ dài vào bộ đệm (buffer) trên stack. Do không giới hạn độ dài đầu vào, việc nhập vượt quá 128 bytes sẽ gây tràn bộ đệm và ghi đè lên các biến cục bộ nằm liền kề.
@@ -71,4 +71,4 @@ Tại sao dùng `p32`? Biến `local_18 `được định nghĩa là kiểu uint
 Little-endian: Vì tệp thực thi là `LSB` (Least Significant Byte), giá trị `0xDEADBEEF` phải được gửi dưới dạng đảo ngược các byte: ``\xef\xbe\xad\xde``. Hàm `p32` sẽ tự động xử lý việc này.
 
 Chạy file và lấy flag:
-![flag](flag.png)
+![flag](https://github.com/Writeup-Challenge-Le-Nam-Thang/Hacktheon/blob/8f442261caa630f812a34b5283946375813bede5/flag.png)
